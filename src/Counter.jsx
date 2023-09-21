@@ -1,21 +1,39 @@
-// src/Counter.js
 import React, { useState, useEffect } from "react";
 
 function Counter() {
-  const [count, setCount] = useState(0);
+  const [visitCount, setVisitCount] = useState(0);
 
   useEffect(() => {
-    // Fetch the visit count from the serverless function
-    fetch("/visit-count")
-      .then((response) => response.json())
-      .then((data) => setCount(data.count))
-      .catch((error) => console.error(error));
+    // Get visit count from localStorage
+    let storedCount = localStorage.getItem("page_view");
+
+    // Check if page_view entry is present
+    if (storedCount) {
+      storedCount = Number(storedCount) + 1;
+      localStorage.setItem("page_view", storedCount);
+    } else {
+      storedCount = 1;
+      localStorage.setItem("page_view", 1);
+    }
+
+    // Set the visitCount state to the retrieved or initialized count
+    setVisitCount(storedCount);
   }, []);
+
+  const resetCount = () => {
+    localStorage.setItem("page_view", 1);
+    setVisitCount(1);
+  };
 
   return (
     <div>
-      <h1>Website Visit Counter</h1>
-      <p>Total Visits: {count}</p>
+      <title>Website Counter</title>{" "}
+      {/* React does not handle the title like this */}
+      <div>Website visit count:</div>
+      <div className="website-counter">{visitCount}</div>
+      <button id="reset" onClick={resetCount}>
+        Reset
+      </button>
     </div>
   );
 }
