@@ -1,12 +1,11 @@
-// src/setupProxy.js
-const { createProxyMiddleware } = require("http-proxy-middleware");
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function (app) {
   app.use(
-    "/api",
+    '/api',
     createProxyMiddleware({
-      target: "http://localhost:5000", // Your server's URL
-      changeOrigin: true
+      target: 'https://your-render-server-url.onrender.com', // Replace with your Render server URL
+      changeOrigin: true,
     })
   );
 };
