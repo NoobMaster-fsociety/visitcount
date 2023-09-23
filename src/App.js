@@ -27,9 +27,7 @@ function App() {
 
   return (
     <div>
-      <p>
-        <a href='https://www.free-counters.org/'>Counter</a>
-      </p>
+  
       <p>Counter Value: {counterValue !== null ? counterValue : 'Loading data...'}</p>
       <script
         type='text/javascript'
