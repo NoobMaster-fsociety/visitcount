@@ -24,3 +24,4 @@ function VisitCounter() {
   }, [visits]);
 
   return <p>{visits}</p>;
+}
